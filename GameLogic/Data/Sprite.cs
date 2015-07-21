@@ -1,10 +1,10 @@
 ﻿
-namespace GameLogic
+namespace GameLogic.Data
 {
     public sealed class Sprite
     {
         public int FramesPerSecond { get; set; }
-        public int Looped { get; set; }
+        public bool Looped { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }

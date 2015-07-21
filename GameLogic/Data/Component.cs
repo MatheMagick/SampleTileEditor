@@ -1,8 +1,8 @@
-﻿namespace GameLogic
+﻿namespace GameLogic.Data
 {
     public sealed class Component
     {
-        public int ComponentType { get; set; }
+        public string ComponentType { get; set; }
         public double AnchorX { get; set; }
         public double AnchorY { get; set; }
         public byte Alpha { get; set; }

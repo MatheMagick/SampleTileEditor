@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Component.cs" />
+    <Compile Include="Data\DefaultCell.cs" />
     <Compile Include="Data\GameWorld.cs" />
     <Compile Include="Data\Sprite.cs" />
     <Compile Include="Data\Template.cs" />
