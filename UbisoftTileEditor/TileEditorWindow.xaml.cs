@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 namespace UbisoftTileEditor
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TileEditorWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TileEditorWindow : Window
     {
-        public MainWindow()
+        public TileEditorWindow()
         {
             InitializeComponent();
             GameWorld world = GameWorldFactory.CreateUbisoftGameWorld();
@@ -18,6 +18,11 @@ namespace UbisoftTileEditor
             GameWorld ubisoftWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
             var serializeObject = JsonConvert.SerializeObject(ubisoftWorld, Formatting.Indented);
             File.WriteAllText("parsed.json", serializeObject);
+        }
+
+        private void MenuItem_OnSaveClick(object sender, RoutedEventArgs e)
+        {
+            Task.
         }
     }
 }
