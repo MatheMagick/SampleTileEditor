@@ -13,16 +13,13 @@ namespace UbisoftTileEditor
         public TileEditorWindow()
         {
             InitializeComponent();
-            GameWorld world = GameWorldFactory.CreateUbisoftGameWorld();
-            string json = JsonConvert.SerializeObject(world, Formatting.Indented);
-            GameWorld ubisoftWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
-            var serializeObject = JsonConvert.SerializeObject(ubisoftWorld, Formatting.Indented);
-            File.WriteAllText("parsed.json", serializeObject);
+
+            var gameWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
+            this.WorldView.GameWorld = gameWorld;
         }
 
         private void MenuItem_OnSaveClick(object sender, RoutedEventArgs e)
         {
-            Task.
         }
     }
 }

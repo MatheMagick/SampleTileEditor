@@ -2,9 +2,9 @@
 {
     public sealed class WorldSize
     {
-        public int TileWidth { get; set; }
-        public int TileHeight { get; set; }
-        public int WidthInTiles { get; set; }
-        public int HeightInTiles { get; set; }
+        public byte TileWidth { get; set; }
+        public byte TileHeight { get; set; }
+        public byte WidthInTiles { get; set; }
+        public byte HeightInTiles { get; set; }
     }
 }

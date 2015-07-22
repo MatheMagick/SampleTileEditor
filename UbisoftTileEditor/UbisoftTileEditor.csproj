@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CellToBitmapImageConverter.cs" />
+    <Compile Include="WorldViewControl.xaml.cs">
+      <DependentUpon>WorldViewControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="TileEditorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +72,10 @@
       <DependentUpon>TileEditorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WorldViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -102,6 +110,44 @@
       <Project>{98363b36-a33a-4bfa-9e45-1654c3c16ee8}</Project>
       <Name>GameLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrowBrown.png" />
+    <Resource Include="Resources\arrowGreen.png" />
+    <Resource Include="Resources\arrowRed.png" />
+    <Resource Include="Resources\blood.png" />
+    <Resource Include="Resources\Column.png" />
+    <Resource Include="Resources\DamageBonus.png" />
+    <Resource Include="Resources\DoorClosed.png" />
+    <Resource Include="Resources\DoorOpen.png" />
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\Ground01.png" />
+    <Resource Include="Resources\Ground02.png" />
+    <Resource Include="Resources\Health.png" />
+    <Resource Include="Resources\MagicArcherIdle.png" />
+    <Resource Include="Resources\MagicArcherRun.png" />
+    <Resource Include="Resources\MagicArcherShoot.png" />
+    <Resource Include="Resources\NormalArcherIdle.png" />
+    <Resource Include="Resources\NormalArcherRun.png" />
+    <Resource Include="Resources\NormalArcherShoot.png" />
+    <Resource Include="Resources\Pause.png" />
+    <Resource Include="Resources\PlayerIdle.png" />
+    <Resource Include="Resources\PlayerRun.png" />
+    <Resource Include="Resources\PlayerShoot.png" />
+    <Resource Include="Resources\RateOfFire.png" />
+    <Resource Include="Resources\restart.png" />
+    <Resource Include="Resources\resume.png" />
+    <Resource Include="Resources\RingOfPower.png" />
+    <Resource Include="Resources\shooting.png" />
+    <Resource Include="Resources\SpeedBonus.png" />
+    <Resource Include="Resources\SpreeArcherIdle.png" />
+    <Resource Include="Resources\SpreeArcherRun.png" />
+    <Resource Include="Resources\SpreeArcherShoot.png" />
+    <Resource Include="Resources\start.png" />
+    <Resource Include="Resources\SwordmanRun.png" />
+    <Resource Include="Resources\SwordsManHit.png" />
+    <Resource Include="Resources\SwordsmanIdle.png" />
+    <Resource Include="Resources\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
