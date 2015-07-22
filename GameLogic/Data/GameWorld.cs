@@ -40,11 +40,4 @@ namespace GameLogic.Data
         private WorldSize _worldSize = new WorldSize();
         private List<GameObject> _gameObjects = new List<GameObject>();
     }
-
-    public sealed class GameObject
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public byte TemplateIndex { get; set; }
-    }
 }
