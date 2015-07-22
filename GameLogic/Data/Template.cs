@@ -1,6 +1,6 @@
 ﻿namespace GameLogic.Data
 {
-    public class Template
+    public sealed class Template
     {
         public string TemplateID { get; set; }
         public double Angle { get; set; }

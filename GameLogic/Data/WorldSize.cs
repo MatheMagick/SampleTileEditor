@@ -1,6 +1,6 @@
 ﻿namespace GameLogic.Data
 {
-    class WorldSize
+    public sealed class WorldSize
     {
         public int TileWidth { get; set; }
         public int TileHeight { get; set; }

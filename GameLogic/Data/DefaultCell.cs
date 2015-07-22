@@ -1,7 +1,7 @@
 ﻿namespace GameLogic.Data
 {
-    internal class DefaultCell
+    public sealed class DefaultCell
     {
-        internal byte TemplateIndex { get; set; }
+        public byte TemplateIndex { get; set; }
     }
 }

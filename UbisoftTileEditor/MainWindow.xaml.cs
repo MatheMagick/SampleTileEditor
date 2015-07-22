@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
+using GameLogic.Data;
+using Newtonsoft.Json;
 
 namespace UbisoftTileEditor
 {
@@ -10,6 +13,11 @@ namespace UbisoftTileEditor
         public MainWindow()
         {
             InitializeComponent();
+            GameWorld world = GameWorldFactory.CreateUbisoftGameWorld();
+            string json = JsonConvert.SerializeObject(world, Formatting.Indented);
+            GameWorld ubisoftWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
+            var serializeObject = JsonConvert.SerializeObject(ubisoftWorld, Formatting.Indented);
+            File.WriteAllText("parsed.json", serializeObject);
         }
     }
 }
