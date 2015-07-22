@@ -1,5 +1,6 @@
 ﻿namespace GameLogic.Data
 {
+// Comment
     class GameWorld
     {
         public WorldSize WorldSize { get; set; }
