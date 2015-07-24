@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GameLogic.Data;
 using UbisoftTileEditor.Annotations;
+using UbisoftTileEditor.ViewModels.Data;
 
 namespace UbisoftTileEditor
 {
@@ -16,7 +17,7 @@ namespace UbisoftTileEditor
     /// </summary>
     public partial class WorldViewControl : UserControl, INotifyPropertyChanged
     {
-        public static readonly DependencyProperty GameWorldProperty = DependencyProperty.Register("GameWorld", typeof(GameWorld), typeof(WorldViewControl));
+        public static readonly DependencyProperty GameWorldProperty = DependencyProperty.Register("GameWorld", typeof(GameWorldViewModel), typeof(WorldViewControl));
         private byte _selectedTemplateIndex;
 
         public WorldViewControl()
@@ -35,11 +36,11 @@ namespace UbisoftTileEditor
             }
         }
 
-        public GameWorld GameWorld
+        public GameWorldViewModel GameWorld
         {
             get
             {
-                return this.GetValue(GameWorldProperty) as GameWorld;
+                return this.GetValue(GameWorldProperty) as GameWorldViewModel;
             }
             set
             {
@@ -64,27 +65,37 @@ namespace UbisoftTileEditor
 
         private void WorldViewControl_OnLoaded(object sender, RoutedEventArgs e)
         {
+            RegenerateWorld();
+        }
+
+        private void RegenerateWorld()
+        {
             this.PanelTiles.Children.Clear();
             var worldSize = this.GameWorld.WorldSize;
 
-            for (byte y = 0; ( y * worldSize.HeightInTiles ) < this.ActualHeight && y < worldSize.HeightInTiles; y++)
+            for (byte y = 0; (y*worldSize.TileHeight) < this.PanelTiles.ActualHeight; y++)
             {
-                for (byte x = 0; ( x * worldSize.WidthInTiles ) < this.ActualWidth && x < worldSize.WidthInTiles; x++)
+                for (byte x = 0; (x*worldSize.TileWidth) < this.PanelTiles.ActualWidth; x++)
                 {
                     var image = new Image();
                     image.Width = worldSize.TileWidth;
                     image.Height = worldSize.TileWidth;
-                    Binding imageSourceBinding = new Binding(string.Format("GameWorld[{0},{1}]", x.ToString(), y.ToString()));
-                    imageSourceBinding.Converter = new CellToBitmapImageConverter(GameWorld);
-                    image.SetBinding(Image.SourceProperty, imageSourceBinding);
+
+                    if ((y < worldSize.HeightInTiles) && (x < worldSize.WidthInTiles))
+                    {
+                        Binding imageSourceBinding =
+                            new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
+                        imageSourceBinding.Converter = new CellToBitmapImageConverter(GameWorld);
+                        image.SetBinding(Image.SourceProperty, imageSourceBinding);
+                    }
 
                     Button buton = new Button();
-                    buton.BorderThickness=new Thickness(0);
-                    buton.Style = (Style)this.FindResource(ToolBar.ButtonStyleKey);
+                    buton.BorderThickness = new Thickness(0);
+                    buton.Style = (Style) this.FindResource(ToolBar.ButtonStyleKey);
                     buton.Margin = new Thickness(0);
                     buton.Padding = new Thickness(0);
                     buton.Content = image;
-                    buton.CommandParameter = new Vector(x,y);
+                    buton.CommandParameter = new Vector(x, y);
                     buton.Command = this.ChangeTemplateCommand;
                     this.PanelTiles.Children.Add(buton);
                 }
@@ -98,15 +109,16 @@ namespace UbisoftTileEditor
             byte x = Convert.ToByte(position.X);
             byte y = Convert.ToByte(position.Y);
 
-            Cell cell = this.GameWorld.Cells.FirstOrDefault(c => c.TileX == x && c.TileY == y);
+            var cell = this.GameWorld.Cells.FirstOrDefault(c => c.TileX == x && c.TileY == y);
 
             if (cell == null)
             {
-                cell = new Cell() { TileX = x, TileY = y };
+                cell = new CellViewModel(new Cell(){ TileX = x, TileY = y });
                 this.GameWorld.Cells.Add(cell);
             }
 
-            cell.TemplateIndex = this.SelectedTemplateIndex;
+            //cell.TemplateIndex = this.SelectedTemplateIndex;
+            cell.TemplateIndex = (byte)this.ListBox.SelectedIndex;
         }
     }
 }

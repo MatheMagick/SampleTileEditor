@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Media.Imaging;
 
 namespace GameLogic.Data
 {
-    public sealed class GameWorld : INotifyPropertyChanged
+    public sealed class GameWorld
     {
         public WorldSize WorldSize
         {
@@ -27,28 +22,10 @@ namespace GameLogic.Data
             set { _defaultCell = value; }
         }
 
-        public ObservableCollection<Cell> Cells
+        public List<Cell> Cells
         {
             get { return _cells; }
-            set
-            {
-                if (value != null)
-                {
-                    value.CollectionChanged -= _cells_CollectionChanged;
-                }
-
-                _cells = value;
-
-                if (_cells != null)
-                {
-                    _cells.CollectionChanged += _cells_CollectionChanged;
-                }
-            }
-        }
-
-        void _cells_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            this.OnPropertyChanged("[,]");
+            set { _cells = value; }
         }
 
         public List<GameObject> GameObjects
@@ -57,32 +34,10 @@ namespace GameLogic.Data
             private set { _gameObjects = value; }
         }
 
-        public Cell this[int x, int y]
-        {
-            get
-            {
-                var cell = this.Cells.FirstOrDefault(c => c.TileX == x && c.TileY == y);
-
-                //if (cell == null)
-                //{
-                //    cell = new Cell(){TileX = x, TileY = y, TemplateIndex = this.DefaultCell.TemplateIndex};
-                //}
-
-                return cell;
-            }
-        }
-
-        private ObservableCollection<Cell> _cells = new ObservableCollection<Cell>();
+        private List<Cell> _cells = new List<Cell>();
         private DefaultCell _defaultCell = new DefaultCell();
         private Template[] _templates = { };
         private WorldSize _worldSize = new WorldSize();
         private List<GameObject> _gameObjects = new List<GameObject>();
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

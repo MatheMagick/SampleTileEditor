@@ -12,7 +12,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<WrapPanel Name="PanelTiles" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
-		<ListBox Grid.Column="1" Margin="10" ItemsSource="{Binding Path=GameWorld.Templates}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+		<ListBox Grid.Column="1" Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>

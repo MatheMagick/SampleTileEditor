@@ -53,8 +53,8 @@
     <Compile Include="Data\GameWorldFactory.cs" />
     <Compile Include="Data\Sprite.cs" />
     <Compile Include="Data\Template.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\WorldSize.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

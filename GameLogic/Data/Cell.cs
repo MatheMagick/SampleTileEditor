@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace GameLogic.Data
+﻿namespace GameLogic.Data
 {
     public sealed class Cell
     {

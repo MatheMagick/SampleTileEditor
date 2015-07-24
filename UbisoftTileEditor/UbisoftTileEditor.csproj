@@ -59,7 +59,13 @@
     <Compile Include="CellToBitmapImageConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\Data\CellViewModel.cs" />
+    <Compile Include="ViewModels\Data\GameObjectViewModel.cs" />
+    <Compile Include="ViewModels\Data\GameWorldViewModel.cs" />
+    <Compile Include="ViewModels\Data\GameWorldViewModelFactory.cs" />
+    <Compile Include="ViewModels\Data\NotifyPropertyChangedBase.cs" />
     <Compile Include="ViewModels\TileEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\Data\WorldSizeViewModel.cs" />
     <Compile Include="ViewModels\WorldViewControlViewModel.cs" />
     <Compile Include="WorldViewControl.xaml.cs">
       <DependentUpon>WorldViewControl.xaml</DependentUpon>
