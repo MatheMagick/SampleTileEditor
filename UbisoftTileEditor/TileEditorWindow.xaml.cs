@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Windows;
-using GameLogic.Data;
-using Newtonsoft.Json;
+﻿using System.Windows;
 
 namespace UbisoftTileEditor
 {
@@ -13,9 +10,6 @@ namespace UbisoftTileEditor
         public TileEditorWindow()
         {
             InitializeComponent();
-
-            var gameWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
-            this.WorldView.GameWorld = gameWorld;
         }
 
         private void MenuItem_OnSaveClick(object sender, RoutedEventArgs e)

@@ -57,6 +57,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CellToBitmapImageConverter.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\TileEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\WorldViewControlViewModel.cs" />
     <Compile Include="WorldViewControl.xaml.cs">
       <DependentUpon>WorldViewControl.xaml</DependentUpon>
     </Compile>

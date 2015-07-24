@@ -14,6 +14,7 @@ namespace GameLogic.Data
         public BitmapImage BitmapImage {
             get
             {
+                // TODO Take into account the rotation angle
                 return new BitmapImage(new Uri(this.Components[0].Sprites[0].TexturePath, UriKind.Relative));
             }
         }
