@@ -106,39 +106,43 @@ namespace UbisoftTileEditor
         {
             // TODO Turn this into pure MVVM
             this.PanelTiles.Children.Clear();
+
             var worldSize = this.GameWorld.WorldSize;
-            
-            for (byte y = 0; ( ( y + 1 ) * worldSize.TileHeight ) <= this.PanelTiles.Height; y++)
+         
+            if (worldSize.TileHeight > 0 && worldSize.TileWidth > 0 && worldSize.HeightInTiles > 0 && worldSize.WidthInTiles > 0)
             {
-                for (byte x = 0; ( ( x + 1 ) * worldSize.TileWidth ) <= this.PanelTiles.Width; x++)
+                for (byte y = 0; ( ( y + 1 ) * worldSize.TileHeight ) <= this.PanelTiles.Height; y++)
                 {
-                    var image = new Image();
-                    image.Width = worldSize.TileWidth;
-                    image.Height = worldSize.TileHeight;
-                    image.Stretch = Stretch.None;
-
-                    if (( y < worldSize.HeightInTiles ) && ( x < worldSize.WidthInTiles ))
+                    for (byte x = 0; ( ( x + 1 ) * worldSize.TileWidth ) <= this.PanelTiles.Width; x++)
                     {
-                        Binding imageSourceBinding = new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
-                        imageSourceBinding.Mode = BindingMode.OneWay;
-                        imageSourceBinding.Converter = new TemplateIndexToBitmapImageConverter(GameWorld.Templates);
-                        image.SetBinding(Image.SourceProperty, imageSourceBinding);
+                        var image = new Image();
+                        image.Width = worldSize.TileWidth;
+                        image.Height = worldSize.TileHeight;
+                        image.Stretch = Stretch.None;
+
+                        if (( y < worldSize.HeightInTiles ) && ( x < worldSize.WidthInTiles ))
+                        {
+                            Binding imageSourceBinding = new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
+                            imageSourceBinding.Mode = BindingMode.OneWay;
+                            imageSourceBinding.Converter = new TemplateIndexToBitmapImageConverter(GameWorld.Templates);
+                            image.SetBinding(Image.SourceProperty, imageSourceBinding);
+                        }
+
+                        Button button = new Button();
+
+                        // Remove border and highlight style
+                        button.BorderThickness = new Thickness(0);
+                        button.Style = (Style)this.FindResource(ToolBar.ButtonStyleKey);
+                        button.Padding = new Thickness(0);
+
+                        button.Width = worldSize.TileWidth;
+                        button.Height = worldSize.TileHeight;
+                        button.Content = image;
+                        button.CommandParameter = new Vector(x, y);
+                        button.Command = this.ChangeTemplateCommand;
+
+                        this.PanelTiles.Children.Add(button);
                     }
-
-                    Button button = new Button();
-
-                    // Remove border and highlight style
-                    button.BorderThickness = new Thickness(0);
-                    button.Style = (Style)this.FindResource(ToolBar.ButtonStyleKey);
-                    button.Padding = new Thickness(0);
-
-                    button.Width = worldSize.TileWidth;
-                    button.Height = worldSize.TileHeight;
-                    button.Content = image;
-                    button.CommandParameter = new Vector(x, y);
-                    button.Command = this.ChangeTemplateCommand;
-
-                    this.PanelTiles.Children.Add(button);
                 }
             }
 

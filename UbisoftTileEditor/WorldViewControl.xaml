@@ -44,9 +44,9 @@
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Tiles" Margin="145,10,0,0" HorizontalAlignment="Left"></Label>
-		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Game objects" Margin="125,105,0,0" HorizontalAlignment="Left"></Label>
-		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Bonuses(base game does not support them) " Margin="10,200,0,0" HorizontalAlignment="Left"></Label>
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" IsHitTestVisible="False" Content="Tiles" Margin="145,10,0,0" HorizontalAlignment="Left"></Label>
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" IsHitTestVisible="False" Content="Game objects" Margin="125,105,0,0" HorizontalAlignment="Left"></Label>
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" IsHitTestVisible="False" Content="Bonuses(base game does not support them) " Margin="100,200,0,0" HorizontalAlignment="Left"></Label>
 
 		<RadioButton Grid.Row="2" Grid.Column="1" Margin="0,10,0,50" Content="Remove game objects"></RadioButton>
 		<Expander Grid.Row="3" Grid.Column="1" IsExpanded="True" Header="World options">

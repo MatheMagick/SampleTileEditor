@@ -20,10 +20,6 @@ namespace UbisoftTileEditor.ViewModels
 
         public TileEditorWindowViewModel()
         {
-            // TODO remove
-            //var gameWorld = JsonConvert.DeserializeObject<GameWorld>(File.ReadAllText("level.json"));
-            //this.GameWorld = new GameWorldViewModel(gameWorld);
-
             this.NewCommand = new RelayCommand(x => NewGameWorld());
             this.OpenCommand = new RelayCommand(x => OpenGameWorld());
             this.SaveCommand = new RelayCommand(x => SaveCurrentGameWorld(), x => this.GameWorld != null);

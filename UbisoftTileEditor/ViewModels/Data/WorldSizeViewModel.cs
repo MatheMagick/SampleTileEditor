@@ -2,7 +2,7 @@
 
 namespace UbisoftTileEditor.ViewModels.Data
 {
-    public sealed class WorldSizeViewModel : NotifyPropertyChangedBase
+    public sealed class  WorldSizeViewModel : NotifyPropertyChangedBase
     {
         private byte _tileWidth;
         private byte _tileHeight;

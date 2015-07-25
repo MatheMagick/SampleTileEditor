@@ -34,9 +34,6 @@ namespace UbisoftTileEditor.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // TODO Remove
-            //CellViewModel cell = value as CellViewModel;
-            //byte templateIndex = (cell == null) ? _gameWorld.DefaultCellTemplateIndex : cell.TemplateIndex;
             byte templateIndex = (byte)value;
 
             return _imagesCache[templateIndex];
