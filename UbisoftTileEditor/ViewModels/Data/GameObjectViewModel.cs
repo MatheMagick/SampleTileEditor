@@ -47,5 +47,10 @@ namespace UbisoftTileEditor.ViewModels.Data
                 OnPropertyChanged();
             }
         }
+
+        public GameObject ToModel()
+        {
+            return new GameObject() {TemplateIndex = this.TemplateIndex, X = this.X, Y = this.Y};
+        }
     }
 }

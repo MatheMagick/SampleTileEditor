@@ -122,6 +122,9 @@ namespace UbisoftTileEditor.ViewModels.Data
 
             result.Templates = this.Templates;
             result.DefaultCell = new DefaultCell(){TemplateIndex = this.DefaultCellTemplateIndex};
+            result.GameObjects = this.GameObjects.Select(x => x.ToModel()).ToArray();
+            result.Cells = this.Cells.Where(x => x.TemplateIndex != this.DefaultCellTemplateIndex).Select(x => x.ToModel()).ToArray();
+            result.WorldSize = this.WorldSize.ToModel();
 
             return result;
         }

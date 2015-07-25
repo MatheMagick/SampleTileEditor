@@ -24,7 +24,7 @@ namespace GameLogic.Data
         {
             lock (Lock)
             {
-                File.WriteAllText(filePath, JsonConvert.SerializeObject(world));
+                File.WriteAllText(filePath, JsonConvert.SerializeObject(world, Formatting.Indented));
             }
         }
     }

@@ -579,7 +579,9 @@
   ],
   "DefaultCell": {
     "TemplateIndex": 2
-  }
+  },
+   "Cells": [],
+   "GameObjects": []
 }</value>
   </data>
 </root>

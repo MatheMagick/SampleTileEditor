@@ -20,7 +20,8 @@ namespace UbisoftTileEditor.ViewModels.Data
             get { return _tileX; }
             set
             {
-                if (value == _tileX) return;
+                if (value == _tileX)
+                    return;
                 _tileX = value;
                 OnPropertyChanged();
             }
@@ -31,7 +32,8 @@ namespace UbisoftTileEditor.ViewModels.Data
             get { return _tileY; }
             set
             {
-                if (value == _tileY) return;
+                if (value == _tileY)
+                    return;
                 _tileY = value;
                 OnPropertyChanged();
             }
@@ -42,10 +44,16 @@ namespace UbisoftTileEditor.ViewModels.Data
             get { return _templateIndex; }
             set
             {
-                if (value == _templateIndex) return;
+                if (value == _templateIndex)
+                    return;
                 _templateIndex = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Cell ToModel()
+        {
+            return new Cell() { TemplateIndex = this.TemplateIndex, TileX = this.TileX, TileY = this.TileY };
         }
     }
 }

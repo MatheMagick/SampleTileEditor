@@ -56,5 +56,10 @@ namespace UbisoftTileEditor.ViewModels.Data
                 this.OnPropertyChanged();
             }
         }
+
+        public WorldSize ToModel()
+        {
+            return new WorldSize() { HeightInTiles = this.HeightInTiles, TileHeight = this.TileHeight, TileWidth = this.TileWidth, WidthInTiles = this.WidthInTiles };
+        }
     }
 }
