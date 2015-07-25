@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using GameLogic.Data;
 using UbisoftTileEditor.Annotations;
 using UbisoftTileEditor.Converters;
@@ -28,7 +29,8 @@ namespace UbisoftTileEditor
 
             if (e.OldValue != null)
             {
-                ((GameWorldViewModel)e.OldValue).WorldSize.PropertyChanged -= worldViewControl.WorldSize_PropertyChanged;
+                ( (GameWorldViewModel)e.OldValue ).WorldSize.PropertyChanged -= worldViewControl.WorldSize_PropertyChanged;
+                ( (GameWorldViewModel)e.OldValue ).PropertyChanged -= worldViewControl.World_PropertyChanged;
             }
 
             worldViewControl.RegenerateWorld();
@@ -36,8 +38,9 @@ namespace UbisoftTileEditor
 
             if (e.NewValue != null)
             {
-                ((GameWorldViewModel)e.NewValue).WorldSize.PropertyChanged += worldViewControl.WorldSize_PropertyChanged;
-            }  
+                ( (GameWorldViewModel)e.NewValue ).WorldSize.PropertyChanged += worldViewControl.WorldSize_PropertyChanged;
+                ( (GameWorldViewModel)e.NewValue ).PropertyChanged += worldViewControl.World_PropertyChanged;
+            }
         }
 
         private byte _selectedTemplateIndex;
@@ -91,14 +94,23 @@ namespace UbisoftTileEditor
             this.RegenerateWorld();
         }
 
+        private void World_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("DefaultCellTemplateIndex", StringComparison.OrdinalIgnoreCase))
+            {
+                this.RegenerateWorld();
+            }
+        }
+
         private void RegenerateWorld()
         {
+            // TODO Turn this into pure MVVM
             this.PanelTiles.Children.Clear();
             var worldSize = this.GameWorld.WorldSize;
-
-            for (byte y = 0; ( y * worldSize.TileHeight ) < this.PanelTiles.Height; y++)
+            
+            for (byte y = 0; ( ( y + 1 ) * worldSize.TileHeight ) <= this.PanelTiles.Height; y++)
             {
-                for (byte x = 0; ( x * worldSize.TileWidth ) < this.PanelTiles.Width; x++)
+                for (byte x = 0; ( ( x + 1 ) * worldSize.TileWidth ) <= this.PanelTiles.Width; x++)
                 {
                     var image = new Image();
                     image.Width = worldSize.TileWidth;
@@ -108,6 +120,7 @@ namespace UbisoftTileEditor
                     if (( y < worldSize.HeightInTiles ) && ( x < worldSize.WidthInTiles ))
                     {
                         Binding imageSourceBinding = new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
+                        imageSourceBinding.Mode = BindingMode.OneWay;
                         imageSourceBinding.Converter = new TemplateIndexToBitmapImageConverter(GameWorld.Templates);
                         image.SetBinding(Image.SourceProperty, imageSourceBinding);
                     }
@@ -144,7 +157,20 @@ namespace UbisoftTileEditor
 
         private void ExecuteChangeTemplate(object o)
         {
-            if (ListBox.SelectedIndex < 4)
+            if (!this.GameWorld.IsInAddMode)
+            {
+                var mouse = Mouse.GetPosition(this.PanelTiles);
+
+                var gameObjectViewModel = this.GameWorld.GameObjects.FirstOrDefault(x => IsMouseInGameObject(mouse, x));
+
+                if (gameObjectViewModel != null)
+                {
+                    this.GameWorld.GameObjects.Remove(gameObjectViewModel);
+                    var gameObjectDisplayImage = this.PanelGameObjects.Children.Cast<Image>().First(x => x.DataContext == gameObjectViewModel);
+                    this.PanelGameObjects.Children.Remove(gameObjectDisplayImage);
+                }
+            }
+            else if (this.GameWorld.SelectedTemplateIndex < 4)
             {
                 Vector position = (Vector)o;
 
@@ -159,31 +185,39 @@ namespace UbisoftTileEditor
                     this.GameWorld.Cells.Add(cell);
                 }
 
-                //cell.TemplateIndex = this.SelectedTemplateIndex;
-                cell.TemplateIndex = (byte)this.ListBox.SelectedIndex;
+                cell.TemplateIndex = this.GameWorld.SelectedTemplateIndex;
             }
             else
             {
                 var mouse = Mouse.GetPosition(this.PanelTiles);
 
-                var gameObjectViewModel = new GameObjectViewModel(new GameObject()) { TemplateIndex = (byte)this.ListBox.SelectedIndex, X = Convert.ToInt32(mouse.X), Y = Convert.ToInt32(mouse.Y) };
+                var gameObjectViewModel = new GameObjectViewModel(new GameObject()) { TemplateIndex = this.GameWorld.SelectedTemplateIndex, X = Convert.ToInt32(mouse.X), Y = Convert.ToInt32(mouse.Y) };
 
                 this.GameWorld.GameObjects.Add(gameObjectViewModel);
-                
+
                 DisplayGameObject(gameObjectViewModel);
             }
+        }
+
+        private bool IsMouseInGameObject(Point mouse, GameObjectViewModel gameObject)
+        {
+            var templateComponent = this.GameWorld.Templates[gameObject.TemplateIndex].Components[0];
+            var gameObjectRect = new Rect(new Point(gameObject.X - templateComponent.Width / 2, gameObject.Y - templateComponent.Height / 2), new Vector(templateComponent.Width, templateComponent.Height));
+
+            return gameObjectRect.Contains(mouse);
         }
 
         private void DisplayGameObject(GameObjectViewModel gameObjectViewModel)
         {
             var image = new Image();
             var template = this.GameWorld.Templates[gameObjectViewModel.TemplateIndex];
+            image.DataContext = gameObjectViewModel;
             image.Width = template.Components[0].Width;
             image.Height = template.Components[0].Height;
             image.Opacity = template.Components[0].Alpha;
-            image.RenderTransform = new RotateTransform((template.Angle / Math.PI) * 180, image.Width/2, image.Height/2);
+            image.RenderTransform = new RotateTransform(( template.Angle / Math.PI ) * 180, image.Width / 2, image.Height / 2);
             image.Source = template.BitmapImage;
-            image.Margin = new Thickness(gameObjectViewModel.X - image.Width/2, gameObjectViewModel.Y - image.Height/2, 0, 0);
+            image.Margin = new Thickness(gameObjectViewModel.X - image.Width / 2, gameObjectViewModel.Y - image.Height / 2, 0, 0);
             image.HorizontalAlignment = HorizontalAlignment.Left;
             image.VerticalAlignment = VerticalAlignment.Top;
             this.PanelGameObjects.Children.Add(image);

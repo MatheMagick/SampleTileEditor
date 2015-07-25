@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using GameLogic.Data;
@@ -9,9 +10,10 @@ namespace UbisoftTileEditor.ViewModels.Data
     {
         private ObservableCollection<CellViewModel> _cells;
         private byte _defaultCell;
-        private Template[] _templates;
         private WorldSizeViewModel _worldSize;
         private ObservableCollection<GameObjectViewModel> _gameObjects;
+        private byte _selectedTemplateIndex;
+        private bool _isInAddMode = true;
 
         public GameWorldViewModel(GameWorld originalWorld)
         {
@@ -49,10 +51,11 @@ namespace UbisoftTileEditor.ViewModels.Data
             }
         }
 
-        public Template[] Templates
+        public Template[] Templates { get; private set; }
+
+        public IEnumerable<Template> TileTemplates
         {
-            get { return _templates; }
-            set { _templates = value; }
+            get { return Templates.Take(4); }
         }
 
         public byte DefaultCellTemplateIndex
@@ -62,6 +65,28 @@ namespace UbisoftTileEditor.ViewModels.Data
             {
                 if (value == _defaultCell) return;
                 _defaultCell = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public byte SelectedTemplateIndex
+        {
+            get { return _selectedTemplateIndex; }
+            set
+            {
+                if (value == _selectedTemplateIndex) return;
+                _selectedTemplateIndex = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsInAddMode
+        {
+            get { return _isInAddMode; }
+            set
+            {
+                if (value.Equals(_isInAddMode)) return;
+                _isInAddMode = value;
                 OnPropertyChanged();
             }
         }

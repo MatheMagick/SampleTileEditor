@@ -4,10 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:helpers="clr-namespace:UbisoftTileEditor.Helpers"
+			 xmlns:conv="clr-namespace:UbisoftTileEditor.Converters"
+			 xmlns:code="clr-namespace:UbisoftTileEditor"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<conv:BoolToCursorConverter x:Key="BoolToCursorConverter" />
+	</UserControl.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>	
+			<RowDefinition Height="Auto"></RowDefinition>	
 			<RowDefinition Height="Auto"></RowDefinition>	
 			<RowDefinition Height="*"></RowDefinition>	
 		</Grid.RowDefinitions>
@@ -15,11 +22,17 @@
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
+		<!--TODO Use UniformGrid-->
+		<WrapPanel Name="PanelTiles" Grid.RowSpan="4" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
+				   Cursor="{Binding Path=GameWorld.IsInAddMode, Converter={StaticResource BoolToCursorConverter}}"/>
 		
-		<WrapPanel Name="PanelTiles" Grid.RowSpan="2" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
+		<Grid Name="PanelGameObjects" Grid.RowSpan="4" ClipToBounds="True" Focusable="False" IsHitTestVisible="False"  Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" ></Grid>
 		
-		<Grid Name="PanelGameObjects" Grid.RowSpan="2" ClipToBounds="True" Focusable="False" IsHitTestVisible="False"  Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" ></Grid>
-		<ListBox Grid.Column="1" Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+		<RadioButton Margin="0,10,0,0" IsChecked="{Binding Path=GameWorld.IsInAddMode}" Content="Add tiles or game objects" Grid.Column="1"></RadioButton>
+
+		<ListBox Grid.Row="1" Grid.Column="1" Margin="10" Width="300" IsEnabled="{Binding Path=GameWorld.IsInAddMode}"
+				 SelectedIndex="{Binding GameWorld.SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates, Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+				 HorizontalAlignment="Left" VerticalAlignment="Top">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
@@ -27,20 +40,27 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Image Source="{Binding BitmapImage}" Margin="0,20,0,0" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
+					<Image Source="{Binding BitmapImage}" Margin="0,25,0,0" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Expander Grid.Row="1" Grid.Column="1" IsExpanded="True" Header="World size options">
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Tiles" Margin="145,10,0,0" HorizontalAlignment="Left"></Label>
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Game objects" Margin="125,105,0,0" HorizontalAlignment="Left"></Label>
+		<Label Grid.Row="1" Grid.Column="1" IsEnabled="{Binding Path=GameWorld.IsInAddMode}" Content="Bonuses(base game does not support them) " Margin="10,200,0,0" HorizontalAlignment="Left"></Label>
+
+		<RadioButton Grid.Row="2" Grid.Column="1" Margin="0,10,0,50" Content="Remove game objects"></RadioButton>
+		<Expander Grid.Row="3" Grid.Column="1" IsExpanded="True" Header="World options">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
 					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="80"></ColumnDefinition>
+					<ColumnDefinition Width="100"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
@@ -55,6 +75,20 @@
 				
 				<Label Grid.Row="3" Content="Height in tiles" />
 				<helpers:NumericTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=GameWorld.WorldSize.HeightInTiles}" />
+
+				<Label Grid.Row="4" Grid.ColumnSpan="2" Content="Default cell template" />
+				<ListBox Grid.Row="5" Grid.ColumnSpan="2" SelectedIndex="{Binding GameWorld.DefaultCellTemplateIndex}" ItemsSource="{Binding Path=GameWorld.TileTemplates}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Image Source="{Binding BitmapImage}" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
 			</Grid>
 		</Expander>
 	</Grid>
