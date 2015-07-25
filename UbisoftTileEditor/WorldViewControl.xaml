@@ -3,31 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:helpers="clr-namespace:UbisoftTileEditor.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>	
+			<RowDefinition Height="*"></RowDefinition>	
+		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		
-		<WrapPanel Name="PanelTiles" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
+		<WrapPanel Name="PanelTiles" Grid.RowSpan="2" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
 		
-		<Grid Name="PanelGameObjects" ClipToBounds="True" Focusable="False" IsHitTestVisible="False"  Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" ></Grid>
-		<StackPanel Grid.Column="1">
-			<ListBox Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
-				<ListBox.ItemsPanel>
-					<ItemsPanelTemplate>
-						<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
-					</ItemsPanelTemplate>
-				</ListBox.ItemsPanel>
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Image Source="{Binding BitmapImage}" Margin="0,20,0,0" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-		</StackPanel>
+		<Grid Name="PanelGameObjects" Grid.RowSpan="2" ClipToBounds="True" Focusable="False" IsHitTestVisible="False"  Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" ></Grid>
+		<ListBox Grid.Column="1" Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Image Source="{Binding BitmapImage}" Margin="0,20,0,0" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<Expander Grid.Row="1" Grid.Column="1" IsExpanded="True" Header="World size options">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="80"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
 
+				<Label Content="Tile Width" />
+				<helpers:NumericTextBox Grid.Column="1" Text="{Binding Path=GameWorld.WorldSize.TileWidth}" />
+
+				<Label Grid.Row="1" Content="Tile Height" />
+				<helpers:NumericTextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=GameWorld.WorldSize.TileHeight}" />
+				
+				<Label Grid.Row="2" Content="Width in tiles" />
+				<helpers:NumericTextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=GameWorld.WorldSize.WidthInTiles}" />
+				
+				<Label Grid.Row="3" Content="Height in tiles" />
+				<helpers:NumericTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=GameWorld.WorldSize.HeightInTiles}" />
+			</Grid>
+		</Expander>
 	</Grid>
 </UserControl>

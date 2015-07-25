@@ -10,22 +10,26 @@ namespace UbisoftTileEditor.Converters
 {
     internal sealed class TemplateIndexToBitmapImageConverter : IValueConverter
     {
-        private readonly Template[] _templates;
-        private Dictionary<byte, BitmapImage> _imagesCache;
+        private readonly Dictionary<byte, BitmapImage> _imagesCache;
 
         public TemplateIndexToBitmapImageConverter(Template[] templates)
         {
-            _templates = templates;
-
-            if (_imagesCache == null)
+            _imagesCache = templates.Select((x, i) =>
             {
-                _imagesCache = templates.Select((x, i) =>
-                    new
-                    {
-                        Image = new BitmapImage(new Uri(x.Components[0].Sprites[0].TexturePath, UriKind.Relative)),
-                        Index = i
-                    }).ToDictionary(x => (byte)x.Index, y => y.Image);
-            }
+                var bitmapImage = new BitmapImage();
+
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(x.Components[0].Sprites[0].TexturePath, UriKind.Relative);
+                bitmapImage.DecodePixelHeight = x.Components[0].Height;
+                bitmapImage.DecodePixelWidth = x.Components[0].Width;
+                bitmapImage.EndInit();
+
+                return new
+                {
+                    Image = bitmapImage,
+                    Index = i
+                };
+            }).ToDictionary(x => (byte)x.Index, y => y.Image);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

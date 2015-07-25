@@ -24,7 +24,20 @@ namespace UbisoftTileEditor
 
         private static void GameWorldChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ( (WorldViewControl)d ).RegenerateWorld();
+            var worldViewControl = (WorldViewControl)d;
+
+            if (e.OldValue != null)
+            {
+                ((GameWorldViewModel)e.OldValue).WorldSize.PropertyChanged -= worldViewControl.WorldSize_PropertyChanged;
+            }
+
+            worldViewControl.RegenerateWorld();
+            worldViewControl.ShowGameObjects();
+
+            if (e.NewValue != null)
+            {
+                ((GameWorldViewModel)e.NewValue).WorldSize.PropertyChanged += worldViewControl.WorldSize_PropertyChanged;
+            }  
         }
 
         private byte _selectedTemplateIndex;
@@ -72,10 +85,15 @@ namespace UbisoftTileEditor
             }
         }
 
+        private void WorldSize_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // No need to redisplay the game objects, since they use absolute coordinates
+            this.RegenerateWorld();
+        }
+
         private void RegenerateWorld()
         {
             this.PanelTiles.Children.Clear();
-            this.PanelGameObjects.Children.Clear();
             var worldSize = this.GameWorld.WorldSize;
 
             for (byte y = 0; ( y * worldSize.TileHeight ) < this.PanelTiles.Height; y++)
@@ -84,7 +102,8 @@ namespace UbisoftTileEditor
                 {
                     var image = new Image();
                     image.Width = worldSize.TileWidth;
-                    image.Height = worldSize.TileWidth;
+                    image.Height = worldSize.TileHeight;
+                    image.Stretch = Stretch.None;
 
                     if (( y < worldSize.HeightInTiles ) && ( x < worldSize.WidthInTiles ))
                     {
@@ -100,6 +119,8 @@ namespace UbisoftTileEditor
                     button.Style = (Style)this.FindResource(ToolBar.ButtonStyleKey);
                     button.Padding = new Thickness(0);
 
+                    button.Width = worldSize.TileWidth;
+                    button.Height = worldSize.TileHeight;
                     button.Content = image;
                     button.CommandParameter = new Vector(x, y);
                     button.Command = this.ChangeTemplateCommand;
@@ -107,6 +128,13 @@ namespace UbisoftTileEditor
                     this.PanelTiles.Children.Add(button);
                 }
             }
+
+            ShowGameObjects();
+        }
+
+        private void ShowGameObjects()
+        {
+            this.PanelGameObjects.Children.Clear();
 
             foreach (var gameObject in this.GameWorld.GameObjects)
             {
