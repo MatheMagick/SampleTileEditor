@@ -7,6 +7,12 @@ namespace UbisoftTileEditor.ViewModels.Data
 {
     public sealed class GameWorldViewModel : NotifyPropertyChangedBase
     {
+        private ObservableCollection<CellViewModel> _cells;
+        private byte _defaultCell;
+        private Template[] _templates;
+        private WorldSizeViewModel _worldSize;
+        private ObservableCollection<GameObjectViewModel> _gameObjects;
+
         public GameWorldViewModel(GameWorld originalWorld)
         {
             _worldSize = new WorldSizeViewModel(originalWorld.WorldSize);
@@ -110,15 +116,14 @@ namespace UbisoftTileEditor.ViewModels.Data
             }
         }
 
-        private ObservableCollection<CellViewModel> _cells;
-        private byte _defaultCell;
-        private Template[] _templates;
-        private WorldSizeViewModel _worldSize;
-        private ObservableCollection<GameObjectViewModel> _gameObjects;
-
         public GameWorld ToModel()
         {
-            throw new System.NotImplementedException();
+            GameWorld result = new GameWorld();
+
+            result.Templates = this.Templates;
+            result.DefaultCell = new DefaultCell(){TemplateIndex = this.DefaultCellTemplateIndex};
+
+            return result;
         }
     }
 }

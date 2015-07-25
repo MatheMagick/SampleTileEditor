@@ -61,36 +61,29 @@ namespace GameLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [
-        ///	{
-        ///		&quot;TemplateID&quot; : &quot;Wall&quot;,
-        ///		&quot;Angle&quot; : 0,
-        ///		&quot;Components&quot;: [
-        ///			{
-        ///				&quot;ComponentType&quot; : &quot;VisualComponent&quot;,
-        ///				&quot;AnchorX&quot; : 0,
-        ///				&quot;AnchorY&quot; : 0,
-        ///				&quot;Alpha&quot; : 255,
-        ///				&quot;Width&quot; : 64,
-        ///				&quot;Height&quot; : 64,
-        ///				&quot;Sprites&quot; :[
-        ///					{
-        ///						&quot;FramesPerSecond&quot; : 0,
-        ///						&quot;Looped&quot; : false,
-        ///						&quot;X&quot; : 0,
-        ///						&quot;Y&quot; : 0,
-        ///						&quot;Width&quot; : 128,
-        ///						&quot;Height&quot; : 128,
-        ///						&quot;NumberOfFrames&quot; : 0,
-        ///						&quot;TexturePath&quot; : &quot;Resources\\Wall.png&quot;,
-        ///						&quot;Name&quot; : &quot;Wall&quot;
-        ///					}
-        ///				]
-        ///			}
-        ///		]
-        ///	},
-        ///	{
-        ///		&quot;Tem [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to {
+        ///  &quot;WorldSize&quot;: {
+        ///    &quot;TileWidth&quot;: 64,
+        ///    &quot;TileHeight&quot;: 64,
+        ///    &quot;WidthInTiles&quot;: 160,
+        ///    &quot;HeightInTiles&quot;: 120
+        ///  },
+        ///  &quot;Templates&quot;: [
+        ///    {
+        ///      &quot;TemplateID&quot;: &quot;Wall&quot;,
+        ///      &quot;Angle&quot;: 0.0,
+        ///      &quot;Components&quot;: [
+        ///        {
+        ///          &quot;ComponentType&quot;: &quot;VisualComponent&quot;,
+        ///          &quot;AnchorX&quot;: 0.0,
+        ///          &quot;AnchorY&quot;: 0.0,
+        ///          &quot;Alpha&quot;: 255,
+        ///          &quot;Width&quot;: 64,
+        ///          &quot;Height&quot;: 64,
+        ///          &quot;Sprites&quot;: [
+        ///            {
+        ///              &quot;FramesPerSecond&quot;: 0,
+        ///              &quot;Looped&quot;: fals [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string UbisoftTemplatesJSON {
             get {

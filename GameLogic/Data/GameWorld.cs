@@ -1,43 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace GameLogic.Data
+﻿namespace GameLogic.Data
 {
     public sealed class GameWorld
     {
-        public WorldSize WorldSize
-        {
-            get { return _worldSize; }
-            set { _worldSize = value; }
-        }
-
-        public Template[] Templates
-        {
-            get { return _templates; }
-            set { _templates = value; }
-        }
-
-        public DefaultCell DefaultCell
-        {
-            get { return _defaultCell; }
-            set { _defaultCell = value; }
-        }
-
-        public List<Cell> Cells
-        {
-            get { return _cells; }
-            set { _cells = value; }
-        }
-
-        public List<GameObject> GameObjects
-        {
-            get { return _gameObjects; }
-            private set { _gameObjects = value; }
-        }
-
-        private List<Cell> _cells = new List<Cell>();
-        private DefaultCell _defaultCell = new DefaultCell();
-        private Template[] _templates = { };
-        private WorldSize _worldSize = new WorldSize();
-        private List<GameObject> _gameObjects = new List<GameObject>();
+        public WorldSize WorldSize { get; set; }
+        public Template[] Templates { get; set; }
+        public DefaultCell DefaultCell { get; set; }
+        public Cell[] Cells { get; set; }
+        public GameObject[] GameObjects { get; set; }
     }
 }

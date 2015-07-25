@@ -11,9 +11,5 @@ namespace UbisoftTileEditor
         {
             InitializeComponent();
         }
-
-        private void MenuItem_OnSaveClick(object sender, RoutedEventArgs e)
-        {
-        }
     }
 }

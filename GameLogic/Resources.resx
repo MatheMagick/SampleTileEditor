@@ -118,457 +118,468 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UbisoftTemplatesJSON" xml:space="preserve">
-    <value>[
-	{
-		"TemplateID" : "Wall",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\Wall.png",
-						"Name" : "Wall"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "Door",
-		"Angle" : 0,
-		"Components": [
-			 {
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\DoorClosed.png",
-						"Name" : "Closed"
-					},
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\DoorOpen.png",
-						"Name" : "Open"
-					}
-				]
-			 }
-		]
-	},
-	{
-		"TemplateID" : "Ground",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\Ground01.png",
-						"Name" : "Ground"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "Column",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\Column.png",
-						"Name" : "Column"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "NormalArcher",
-		"Angle" : 1.8,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0.5,
-				"AnchorY" : 0.5,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\NormalArcherIdle.png",
-						"Name" : "Idle"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : true,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\NormalArcherRun.png",
-						"Name" : "Run"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\NormalArcherShoot.png",
-						"Name" : "Shoot"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "SpreeArcher",
-		"Angle" : 2,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0.5,
-				"AnchorY" : 0.5,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\SpreeArcherIdle.png",
-						"Name" : "Idle"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : true,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\SpreeArcherRun.png",
-						"Name" : "Run"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\SpreeArcherShoot.png",
-						"Name" : "Shoot"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "MagicArcher",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0.5,
-				"AnchorY" : 0.5,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\MagicArcherIdle.png",
-						"Name" : "Idle"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : true,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\MagicArcherRun.png",
-						"Name" : "Run"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\MagicArcherShoot.png",
-						"Name" : "Shoot"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "Player",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0.5,
-				"AnchorY" : 0.5,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\PlayerIdle.png",
-						"Name" : "Idle"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : true,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\PlayerRun.png",
-						"Name" : "Run"
-					},
-					{
-						"FramesPerSecond" : 10,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 512,
-						"Height" : 128,
-						"NumberOfFrames" : 4,
-						"TexturePath" : "Resources\\PlayerShoot.png",
-						"Name" : "Shoot"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "SpeedBonus",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\SpeedBonus.png",
-						"Name" : "SpeedBonus"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "DamageBonus",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\DamageBonus.png",
-						"Name" : "DamageBonus"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "RateOfFire",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\RateOfFire.png",
-						"Name" : "RateOfFire"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "Health",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\Health.png",
-						"Name" : "Health"
-					}
-				]
-			}
-		]
-	},
-	{
-		"TemplateID" : "RingOfPower",
-		"Angle" : 0,
-		"Components": [
-			{
-				"ComponentType" : "VisualComponent",
-				"AnchorX" : 0,
-				"AnchorY" : 0,
-				"Alpha" : 255,
-				"Width" : 64,
-				"Height" : 64,
-				"Sprites" :[
-					{
-						"FramesPerSecond" : 0,
-						"Looped" : false,
-						"X" : 0,
-						"Y" : 0,
-						"Width" : 128,
-						"Height" : 128,
-						"NumberOfFrames" : 0,
-						"TexturePath" : "Resources\\RingOfPower.png",
-						"Name" : "RingOfPower"
-					}
-				]
-			}
-		]
-	}
-  ]</value>
+    <value>{
+  "WorldSize": {
+    "TileWidth": 64,
+    "TileHeight": 64,
+    "WidthInTiles": 160,
+    "HeightInTiles": 120
+  },
+  "Templates": [
+    {
+      "TemplateID": "Wall",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\Wall.png",
+              "Name": "Wall"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "Door",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\DoorClosed.png",
+              "Name": "Closed"
+            },
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\DoorOpen.png",
+              "Name": "Open"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "Ground",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\Ground01.png",
+              "Name": "Ground"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "Column",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\Column.png",
+              "Name": "Column"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "NormalArcher",
+      "Angle": 1.8,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.5,
+          "AnchorY": 0.5,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\NormalArcherIdle.png",
+              "Name": "Idle"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": true,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\NormalArcherRun.png",
+              "Name": "Run"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\NormalArcherShoot.png",
+              "Name": "Shoot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "SpreeArcher",
+      "Angle": 2.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.5,
+          "AnchorY": 0.5,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\SpreeArcherIdle.png",
+              "Name": "Idle"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": true,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\SpreeArcherRun.png",
+              "Name": "Run"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\SpreeArcherShoot.png",
+              "Name": "Shoot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "MagicArcher",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.5,
+          "AnchorY": 0.5,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\MagicArcherIdle.png",
+              "Name": "Idle"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": true,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\MagicArcherRun.png",
+              "Name": "Run"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\MagicArcherShoot.png",
+              "Name": "Shoot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "Player",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.5,
+          "AnchorY": 0.5,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\PlayerIdle.png",
+              "Name": "Idle"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": true,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\PlayerRun.png",
+              "Name": "Run"
+            },
+            {
+              "FramesPerSecond": 10,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 512,
+              "Height": 128,
+              "NumberOfFrames": 4,
+              "TexturePath": "Resources\\PlayerShoot.png",
+              "Name": "Shoot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "SpeedBonus",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\SpeedBonus.png",
+              "Name": "SpeedBonus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "DamageBonus",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\DamageBonus.png",
+              "Name": "DamageBonus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "RateOfFire",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\RateOfFire.png",
+              "Name": "RateOfFire"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "Health",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\Health.png",
+              "Name": "Health"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TemplateID": "RingOfPower",
+      "Angle": 0.0,
+      "Components": [
+        {
+          "ComponentType": "VisualComponent",
+          "AnchorX": 0.0,
+          "AnchorY": 0.0,
+          "Alpha": 255,
+          "Width": 64,
+          "Height": 64,
+          "Sprites": [
+            {
+              "FramesPerSecond": 0,
+              "Looped": false,
+              "X": 0,
+              "Y": 0,
+              "Width": 128,
+              "Height": 128,
+              "NumberOfFrames": 0,
+              "TexturePath": "Resources\\RingOfPower.png",
+              "Name": "RingOfPower"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "DefaultCell": {
+    "TemplateIndex": 2
+  }
+}</value>
   </data>
 </root>

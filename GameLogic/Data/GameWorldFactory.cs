@@ -9,11 +9,8 @@ namespace GameLogic.Data
 
         public static GameWorld CreateDefaultUbisoftGameWorld()
         {
-            GameWorld result = new GameWorld();
-
-            InitializeTemplates(result);
-
-            result.DefaultCell.TemplateIndex = 2;
+            string ubisoftTemplates = Resources.UbisoftTemplatesJSON;
+            GameWorld result =  JsonConvert.DeserializeObject<GameWorld>(ubisoftTemplates);
 
             return result;
         }
@@ -29,12 +26,6 @@ namespace GameLogic.Data
             {
                 File.WriteAllText(filePath, JsonConvert.SerializeObject(world));
             }
-        }
-
-        private static void InitializeTemplates(GameWorld result)
-        {
-            string ubisoftTemplates = Resources.UbisoftTemplatesJSON;
-            result.Templates = JsonConvert.DeserializeObject<Template[]>(ubisoftTemplates);
         }
     }
 }

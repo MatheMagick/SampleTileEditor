@@ -8,6 +8,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GameLogic.Data;
 using UbisoftTileEditor.Annotations;
+using UbisoftTileEditor.Converters;
+using UbisoftTileEditor.Helpers;
 using UbisoftTileEditor.ViewModels.Data;
 
 namespace UbisoftTileEditor
@@ -17,7 +19,13 @@ namespace UbisoftTileEditor
     /// </summary>
     public partial class WorldViewControl : UserControl, INotifyPropertyChanged
     {
-        public static readonly DependencyProperty GameWorldProperty = DependencyProperty.Register("GameWorld", typeof(GameWorldViewModel), typeof(WorldViewControl));
+        public static readonly DependencyProperty GameWorldProperty = DependencyProperty.Register("GameWorld", typeof(GameWorldViewModel), typeof(WorldViewControl), new PropertyMetadata(GameWorldChanged));
+
+        private static void GameWorldChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ( (WorldViewControl)d ).RegenerateWorld();
+        }
+
         private byte _selectedTemplateIndex;
 
         public WorldViewControl()
@@ -31,7 +39,7 @@ namespace UbisoftTileEditor
             get { return _selectedTemplateIndex; }
             set
             {
-                _selectedTemplateIndex = value; 
+                _selectedTemplateIndex = value;
                 this.OnPropertyChanged();
             }
         }
@@ -63,41 +71,38 @@ namespace UbisoftTileEditor
             }
         }
 
-        private void WorldViewControl_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            RegenerateWorld();
-        }
-
         private void RegenerateWorld()
         {
             this.PanelTiles.Children.Clear();
             var worldSize = this.GameWorld.WorldSize;
 
-            for (byte y = 0; (y*worldSize.TileHeight) < this.PanelTiles.ActualHeight; y++)
+            for (byte y = 0; ( y * worldSize.TileHeight ) < this.PanelTiles.Height; y++)
             {
-                for (byte x = 0; (x*worldSize.TileWidth) < this.PanelTiles.ActualWidth; x++)
+                for (byte x = 0; ( x * worldSize.TileWidth ) < this.PanelTiles.Width; x++)
                 {
                     var image = new Image();
                     image.Width = worldSize.TileWidth;
                     image.Height = worldSize.TileWidth;
 
-                    if ((y < worldSize.HeightInTiles) && (x < worldSize.WidthInTiles))
+                    if (( y < worldSize.HeightInTiles ) && ( x < worldSize.WidthInTiles ))
                     {
-                        Binding imageSourceBinding =
-                            new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
-                        imageSourceBinding.Converter = new CellToBitmapImageConverter(GameWorld);
+                        Binding imageSourceBinding = new Binding(string.Format("GameWorld[{0},{1}].TemplateIndex", x.ToString(), y.ToString()));
+                        imageSourceBinding.Converter = new TemplateIndexToBitmapImageConverter(GameWorld.Templates);
                         image.SetBinding(Image.SourceProperty, imageSourceBinding);
                     }
 
-                    Button buton = new Button();
-                    buton.BorderThickness = new Thickness(0);
-                    buton.Style = (Style) this.FindResource(ToolBar.ButtonStyleKey);
-                    buton.Margin = new Thickness(0);
-                    buton.Padding = new Thickness(0);
-                    buton.Content = image;
-                    buton.CommandParameter = new Vector(x, y);
-                    buton.Command = this.ChangeTemplateCommand;
-                    this.PanelTiles.Children.Add(buton);
+                    Button button = new Button();
+
+                    // Remove border and highlight style
+                    button.BorderThickness = new Thickness(0);
+                    button.Style = (Style)this.FindResource(ToolBar.ButtonStyleKey);
+                    button.Padding = new Thickness(0);
+
+                    button.Content = image;
+                    button.CommandParameter = new Vector(x, y);
+                    button.Command = this.ChangeTemplateCommand;
+
+                    this.PanelTiles.Children.Add(button);
                 }
             }
         }
@@ -113,7 +118,7 @@ namespace UbisoftTileEditor
 
             if (cell == null)
             {
-                cell = new CellViewModel(new Cell(){ TileX = x, TileY = y });
+                cell = new CellViewModel(new Cell() { TileX = x, TileY = y });
                 this.GameWorld.Cells.Add(cell);
             }
 
