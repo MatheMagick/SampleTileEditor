@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using GameLogic.Data;
 using UbisoftTileEditor.Annotations;
 using UbisoftTileEditor.Converters;
@@ -74,6 +75,7 @@ namespace UbisoftTileEditor
         private void RegenerateWorld()
         {
             this.PanelTiles.Children.Clear();
+            this.PanelGameObjects.Children.Clear();
             var worldSize = this.GameWorld.WorldSize;
 
             for (byte y = 0; ( y * worldSize.TileHeight ) < this.PanelTiles.Height; y++)
@@ -105,25 +107,58 @@ namespace UbisoftTileEditor
                     this.PanelTiles.Children.Add(button);
                 }
             }
+
+            foreach (var gameObject in this.GameWorld.GameObjects)
+            {
+                DisplayGameObject(gameObject);
+            }
         }
 
         private void ExecuteChangeTemplate(object o)
         {
-            Vector position = (Vector)o;
-
-            byte x = Convert.ToByte(position.X);
-            byte y = Convert.ToByte(position.Y);
-
-            var cell = this.GameWorld.Cells.FirstOrDefault(c => c.TileX == x && c.TileY == y);
-
-            if (cell == null)
+            if (ListBox.SelectedIndex < 4)
             {
-                cell = new CellViewModel(new Cell() { TileX = x, TileY = y });
-                this.GameWorld.Cells.Add(cell);
-            }
+                Vector position = (Vector)o;
 
-            //cell.TemplateIndex = this.SelectedTemplateIndex;
-            cell.TemplateIndex = (byte)this.ListBox.SelectedIndex;
+                byte x = Convert.ToByte(position.X);
+                byte y = Convert.ToByte(position.Y);
+
+                var cell = this.GameWorld.Cells.FirstOrDefault(c => c.TileX == x && c.TileY == y);
+
+                if (cell == null)
+                {
+                    cell = new CellViewModel(new Cell() { TileX = x, TileY = y });
+                    this.GameWorld.Cells.Add(cell);
+                }
+
+                //cell.TemplateIndex = this.SelectedTemplateIndex;
+                cell.TemplateIndex = (byte)this.ListBox.SelectedIndex;
+            }
+            else
+            {
+                var mouse = Mouse.GetPosition(this.PanelTiles);
+
+                var gameObjectViewModel = new GameObjectViewModel(new GameObject()) { TemplateIndex = (byte)this.ListBox.SelectedIndex, X = Convert.ToInt32(mouse.X), Y = Convert.ToInt32(mouse.Y) };
+
+                this.GameWorld.GameObjects.Add(gameObjectViewModel);
+                
+                DisplayGameObject(gameObjectViewModel);
+            }
+        }
+
+        private void DisplayGameObject(GameObjectViewModel gameObjectViewModel)
+        {
+            var image = new Image();
+            var template = this.GameWorld.Templates[gameObjectViewModel.TemplateIndex];
+            image.Width = template.Components[0].Width;
+            image.Height = template.Components[0].Height;
+            image.Opacity = template.Components[0].Alpha;
+            image.RenderTransform = new RotateTransform((template.Angle / Math.PI) * 180, image.Width/2, image.Height/2);
+            image.Source = template.BitmapImage;
+            image.Margin = new Thickness(gameObjectViewModel.X - image.Width/2, gameObjectViewModel.Y - image.Height/2, 0, 0);
+            image.HorizontalAlignment = HorizontalAlignment.Left;
+            image.VerticalAlignment = VerticalAlignment.Top;
+            this.PanelGameObjects.Children.Add(image);
         }
     }
 }

@@ -10,18 +10,24 @@
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
+		
 		<WrapPanel Name="PanelTiles" Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
-		<ListBox Grid.Column="1" Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
-			<ListBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
-				</ItemsPanelTemplate>
-			</ListBox.ItemsPanel>
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Image Source="{Binding BitmapImage}" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+		
+		<Grid Name="PanelGameObjects" ClipToBounds="True" Focusable="False" IsHitTestVisible="False"  Width="1024" Height="768" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" ></Grid>
+		<StackPanel Grid.Column="1">
+			<ListBox Margin="10" SelectedIndex="{Binding SelectedTemplateIndex}" ItemsSource="{Binding Path=GameWorld.Templates}" Name="ListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel IsItemsHost="True" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"></WrapPanel>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Image Source="{Binding BitmapImage}" Margin="0,20,0,0" Width="64" Height="64" ToolTip="{Binding TemplateID}"></Image>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+
 	</Grid>
 </UserControl>
